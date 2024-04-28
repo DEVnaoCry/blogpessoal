@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ILike, Repository } from "typeorm";
+import { DeleteResult, ILike, Repository } from "typeorm";
 import { Postagem } from "../entities/postagem.entity";
 
 @Injectable()
@@ -48,5 +48,16 @@ export class PostagemService {
             throw new HttpException('Postagem não encontrada!', HttpStatus.NOT_FOUND);
 
         return await this.postagemRepository.save(postagem);
+    }
+
+    async delete(id: number): Promise<DeleteResult> {
+
+        let buscaPostagem = await this.findById(id);
+
+        if (!buscaPostagem)
+            throw new HttpException('Postagem não encontrada!', HttpStatus.NOT_FOUND);
+
+        return await this.postagemRepository.delete(id);
+
     }
 }
