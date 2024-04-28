@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Postagem } from './postagem/entities/postagem.entity';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: '#21552019',
       database: 'db_blogpessoal',
-      entities: [],
+      entities: [Postagem],
       synchronize: true,
     })
   ],
@@ -18,3 +19,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   providers: [],
 })
 export class AppModule { }
+
