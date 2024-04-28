@@ -40,6 +40,13 @@ export class PostagemService {
         return await this.postagemRepository.save(postagem);
     }
 
+    async update(postagem: Postagem): Promise<Postagem> {
 
+        let buscaPostagem = await this.findById(postagem.id);
+
+        if (!buscaPostagem || !postagem.id)
+            throw new HttpException('Postagem não encontrada!', HttpStatus.NOT_FOUND);
+
+        return await this.postagemRepository.save(postagem);
+    }
 }
-

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { Postagem } from "../entities/postagem.entity";
 import { PostagemService } from "../services/postagem.service";
 
@@ -30,4 +30,9 @@ export class PostagemController {
         return this.postagemService.create(postagem);
     }
 
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    update(@Body() postagem: Postagem): Promise<Postagem> {
+        return this.postagemService.update(postagem);
+    }
 }
